@@ -33,7 +33,6 @@ app.get("/", (req, res) => {
 });
 
 app.post("/grosserie", async (req, res) => {
-  console.log(req.body);
   const gross = new Grosserie(req.body);
 
   try {
@@ -42,6 +41,17 @@ app.post("/grosserie", async (req, res) => {
   } catch (error) {
     res.status(500).send(error);
   }
+});
+
+app.delete("/grosserie/:id", (req, res) => {
+  const id = req.params.id;
+  Grosserie.deleteOne({ _id: id }, function (err, data) {
+    if (err) {
+      res.status(500).send(error);
+    } else {
+      res.send(data);
+    }
+  });
 });
 
 app.get("/grosseries", (req, res) => {
