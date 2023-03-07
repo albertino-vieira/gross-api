@@ -1,6 +1,7 @@
 // index.js
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const Grosserie = require("./db/Grosserie");
 const grosserie = require("./db/Grosserie");
 
@@ -23,6 +24,7 @@ const app = express();
 const PORT = 4000;
 
 startDB();
+app.use(cors());
 app.use(express.json());
 app.listen(PORT, () => {
   console.log(`API listening on PORT ${PORT} `);
