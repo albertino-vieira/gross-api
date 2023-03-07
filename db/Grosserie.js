@@ -4,8 +4,17 @@ const Schema = mongoose.Schema;
 
 let grosserie = new Schema(
   {
-    text: {
+    name: {
       type: String,
+      required: true,
+    },
+    quantaty: {
+      type: Number,
+      default: 0,
+    },
+    checked: {
+      type: Boolean,
+      default: false,
     },
   },
   { collection: "Expense" }
