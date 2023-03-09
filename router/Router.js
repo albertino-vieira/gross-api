@@ -6,8 +6,8 @@ const {
 } = require("../controller/GrocerieController");
 const router = express.Router();
 
-router.get("/grosseries", getGroceries);
-router.post("/grosserie", createGroceries);
-router.delete("/grosserie/:id", deleteGroceries);
+router.get("/groceries", getGroceries);
+router.post("/grocerie", createGroceries);
+router.delete("/grocerie/:id", deleteGroceries);
 
 module.exports = router;
