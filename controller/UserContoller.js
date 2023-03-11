@@ -1,5 +1,5 @@
 const User = require("../db/User");
-//const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 //require("dotenv").config();
 
