@@ -1,10 +1,10 @@
 const User = require("../db/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-require("dotenv").config();
+//require("dotenv").config();
 
 const createUser = async (req, res) => {
-  const { email, password } = req.body;
+  /* const { email, password } = req.body;
 
   const userAlreadyExists = await User.findOne({
     email,
@@ -25,7 +25,7 @@ const createUser = async (req, res) => {
     res.send(user);
   } catch (error) {
     res.status(500).send(error);
-  }
+  }*/
 };
 
 const login = async (req, res) => {
