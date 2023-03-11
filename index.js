@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const router = require("./router/Router");
+require("dotenv").config();
 
 function startDB() {
   mongoose.connect(
