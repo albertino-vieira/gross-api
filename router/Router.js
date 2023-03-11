@@ -10,7 +10,7 @@ const router = express.Router();
 router.get("/groceries", getGroceries);
 router.post("/grocerie", createGroceries);
 router.delete("/grocerie/:id", deleteGroceries);
-//router.post("/user", createUser);
-//router.post("/login", login);
+router.post("/user", createUser);
+router.post("/login", login);
 
 module.exports = router;
