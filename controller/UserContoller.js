@@ -34,7 +34,7 @@ const login = async (req, res) => {
   if (userExists) {
     const passwordIsCorrect = bcrypt.compareSync(password, userExists.password);
     if (passwordIsCorrect) {
-      const token = jwt.sign({ id: userExists.id }, `${process.env.SECRET}`, {
+      const token = jwt.sign({ id: userExists.id }, `${"this is a "}`, {
         expiresIn: 10000000,
       });
       return res.json({ auth: true, token: token, ...userExists._doc });
