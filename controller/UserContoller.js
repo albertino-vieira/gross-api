@@ -40,7 +40,7 @@ const login = async (req, res) => {
       return res.json({ auth: true, token: token, ...userExists._doc });
     } else {
       return res.status(400).json({
-        error: "Email or password incorrect",
+        error: "Error",
       });
     }
   } else {
