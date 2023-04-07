@@ -16,6 +16,18 @@ let grosserie = new Schema(
       type: Boolean,
       default: false,
     },
+    listId: {
+      type: String,
+      default: "",
+    },
+    createdBy: {
+      type: String,
+      required: true,
+    },
+    createdDate: {
+      type: Date,
+      default: mongoose.now(),
+    },
   },
   { collection: "Expense" }
 );
