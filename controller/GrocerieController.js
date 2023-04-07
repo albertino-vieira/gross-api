@@ -23,7 +23,10 @@ const deleteGroceries = (req, res) => {
 };
 
 const createGroceries = async (req, res) => {
-  const gross = new Grosserie(req.body);
+  const ele = Object.fromEntries(
+    Object.entries(req.body).filter((e) => e[0] != "_id")
+  );
+  const gross = new Grosserie(ele);
 
   try {
     await gross.save();
