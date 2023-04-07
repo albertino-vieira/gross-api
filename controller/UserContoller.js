@@ -50,4 +50,15 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { createUser, login };
+const deleteUser = async (req, res) => {
+  const id = req.params.id;
+  User.deleteOne({ _id: id }, function (err, data) {
+    if (err) {
+      res.status(500).send(error);
+    } else {
+      res.send(data);
+    }
+  });
+};
+
+module.exports = { createUser, login, deleteUser };

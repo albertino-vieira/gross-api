@@ -33,4 +33,27 @@ const createGroceries = async (req, res) => {
   }
 };
 
-module.exports = { getGroceries, deleteGroceries, createGroceries };
+const deleteGroceriesBulk = async (req, res) => {
+  const { ids } = req.body;
+  Grosserie.deleteMany(
+    {
+      _id: {
+        $in: ids,
+      },
+    },
+    function (err, data) {
+      if (err) {
+        res.status(500).send(error);
+      } else {
+        res.send(data);
+      }
+    }
+  );
+};
+
+module.exports = {
+  getGroceries,
+  deleteGroceries,
+  createGroceries,
+  deleteGroceriesBulk,
+};
