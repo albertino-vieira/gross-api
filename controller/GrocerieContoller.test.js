@@ -18,8 +18,24 @@ describe("groceries", () => {
   describe("getGroceries", () => {
     it("should return all groceries", async () => {
       const mockResult = [
-        { _id: "1", name: "apple", price: 1.99 },
-        { _id: "2", name: "banana", price: 0.99 },
+        {
+          _id: "someid",
+          name: "Apples",
+          createdBy: "1234",
+          checked: false,
+          quantaty: 0,
+          createdDate: mongoose.now(),
+          listId: "",
+        },
+        {
+          _id: "someid2",
+          name: "Bananas",
+          createdBy: "1234",
+          checked: false,
+          quantaty: 0,
+          createdDate: mongoose.now(),
+          listId: "",
+        },
       ];
       const req = {};
       const res = {
