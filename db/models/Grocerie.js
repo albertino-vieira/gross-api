@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-let grosserie = new Schema(
+let grocerie = new Schema(
   {
     name: {
       type: String,
@@ -32,4 +32,4 @@ let grosserie = new Schema(
   { collection: "Expense" }
 );
 
-module.exports = mongoose.model("Expense", grosserie);
+module.exports = mongoose.model("Expense", grocerie);

@@ -5,10 +5,10 @@ const {
   deleteGroceriesBulk,
 } = require("./GrocerieController");
 
-const Grosserie = require("../db/Grosserie");
+const Grocerie = require("../../db/models/Grocerie");
 const { default: mongoose } = require("mongoose");
 
-jest.mock("../db/Grosserie");
+jest.mock("../../db/models/Grocerie");
 
 describe("groceries", () => {
   afterEach(() => {
@@ -43,13 +43,13 @@ describe("groceries", () => {
         status: jest.fn().mockReturnThis(),
       };
 
-      Grosserie.find.mockImplementationOnce((query, callback) => {
+      Grocerie.find.mockImplementationOnce((query, callback) => {
         callback(null, mockResult);
       });
 
       await getGroceries(req, res);
 
-      expect(Grosserie.find).toHaveBeenCalledWith({}, expect.any(Function));
+      expect(Grocerie.find).toHaveBeenCalledWith({}, expect.any(Function));
       expect(res.send).toHaveBeenCalledWith(mockResult);
     });
 
@@ -61,13 +61,13 @@ describe("groceries", () => {
         status: jest.fn().mockReturnThis(),
       };
 
-      Grosserie.find.mockImplementationOnce((query, callback) => {
+      Grocerie.find.mockImplementationOnce((query, callback) => {
         callback(error);
       });
 
       await getGroceries(req, res);
 
-      expect(Grosserie.find).toHaveBeenCalledWith({}, expect.any(Function));
+      expect(Grocerie.find).toHaveBeenCalledWith({}, expect.any(Function));
       expect(res.status).toHaveBeenCalledWith(500);
       expect(res.status().send).toHaveBeenCalledWith(error);
     });
@@ -83,13 +83,13 @@ describe("groceries", () => {
 
       const mockResult = { n: 1, ok: 1 };
 
-      Grosserie.deleteOne.mockImplementationOnce((query, callback) => {
+      Grocerie.deleteOne.mockImplementationOnce((query, callback) => {
         callback(null, mockResult);
       });
 
       await deleteGroceries(req, res);
 
-      expect(Grosserie.deleteOne).toHaveBeenCalledWith(
+      expect(Grocerie.deleteOne).toHaveBeenCalledWith(
         { _id: "123" },
         expect.any(Function)
       );
@@ -104,13 +104,13 @@ describe("groceries", () => {
         status: jest.fn().mockReturnThis(),
       };
 
-      Grosserie.deleteOne.mockImplementationOnce((query, callback) => {
+      Grocerie.deleteOne.mockImplementationOnce((query, callback) => {
         callback(error);
       });
 
       await deleteGroceries(req, res);
 
-      expect(Grosserie.deleteOne).toHaveBeenCalledWith(
+      expect(Grocerie.deleteOne).toHaveBeenCalledWith(
         { _id: "123" },
         expect.any(Function)
       );
@@ -144,9 +144,9 @@ describe("groceries", () => {
       jest.clearAllMocks();
     });
 
-    it("should create a new Grosserie object and send it as the response", async () => {
-      const saveSpy = jest.spyOn(Grosserie.prototype, "save");
-      const expectedGrosserie = {
+    it("should create a new Grocerie object and send it as the response", async () => {
+      const saveSpy = jest.spyOn(Grocerie.prototype, "save");
+      const expectedGrocerie = {
         _id: "someid",
         name: "Apples",
         createdBy: "1234",
@@ -155,17 +155,17 @@ describe("groceries", () => {
         createdDate: mongoose.now(),
         listId: "",
       };
-      saveSpy.mockResolvedValueOnce(expectedGrosserie);
+      saveSpy.mockResolvedValueOnce(expectedGrocerie);
 
       await createGroceries(req, res);
       expect(res.status).not.toHaveBeenCalled();
-      expect(res.send).toHaveBeenCalledWith(expectedGrosserie);
+      expect(res.send).toHaveBeenCalledWith(expectedGrocerie);
       expect(saveSpy).toHaveBeenCalledTimes(1);
       expect(saveSpy).toHaveBeenCalledWith();
     });
 
     it("should handle errors and return a 500 error response", async () => {
-      const saveSpy = jest.spyOn(Grosserie.prototype, "save");
+      const saveSpy = jest.spyOn(Grocerie.prototype, "save");
       const expectedError = new Error("Test error");
       saveSpy.mockRejectedValueOnce(expectedError);
 
@@ -199,7 +199,7 @@ describe("groceries", () => {
         callback(null, "success");
       });
 
-      Grosserie.deleteMany.mockImplementationOnce(mockDeleteMany);
+      Grocerie.deleteMany.mockImplementationOnce(mockDeleteMany);
 
       await deleteGroceriesBulk(req, res);
 
@@ -216,7 +216,7 @@ describe("groceries", () => {
         callback(mockError, null);
       });
 
-      Grosserie.deleteMany.mockImplementationOnce(mockDeleteMany);
+      Grocerie.deleteMany.mockImplementationOnce(mockDeleteMany);
 
       await deleteGroceriesBulk(req, res);
 

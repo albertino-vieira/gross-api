@@ -1,8 +1,7 @@
-const Grosserie = require("../db/Grosserie");
-const grosserie = require("../db/Grosserie");
+const Grocerie = require("../../db/models/Grocerie");
 
 const getGroceries = (req, res) => {
-  grosserie.find({}, function (err, result) {
+  Grocerie.find({}, function (err, result) {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -13,7 +12,7 @@ const getGroceries = (req, res) => {
 
 const deleteGroceries = (req, res) => {
   const id = req.params.id;
-  Grosserie.deleteOne({ _id: id }, function (err, data) {
+  Grocerie.deleteOne({ _id: id }, function (err, data) {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -26,7 +25,7 @@ const createGroceries = async (req, res) => {
   const ele = Object.fromEntries(
     Object.entries(req.body).filter((e) => e[0] != "_id")
   );
-  const grocerieToAdd = new Grosserie(ele);
+  const grocerieToAdd = new Grocerie(ele);
 
   try {
     const grocerie = await grocerieToAdd.save();
@@ -38,7 +37,7 @@ const createGroceries = async (req, res) => {
 
 const deleteGroceriesBulk = async (req, res) => {
   const { ids } = req.body;
-  await Grosserie.deleteMany(
+  await Grocerie.deleteMany(
     {
       _id: {
         $in: ids,

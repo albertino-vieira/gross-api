@@ -5,14 +5,12 @@ const cors = require("cors");
 const router = require("./router/Router");
 require("dotenv").config();
 const { Server } = require("socket.io");
+require("dotenv").config();
 
 function startDB() {
-  mongoose.connect(
-    "mongodb+srv://albertinotino1:Obbpv7dgMJJt9JNg@cluster0.pexuj.mongodb.net/test?retryWrites=true&w=majority",
-    {
-      useNewUrlParser: true,
-    }
-  );
+  mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+  });
 }
 
 const db = mongoose.connection;
@@ -23,7 +21,7 @@ db.once("open", function () {
 
 const app = express();
 const PORT = 4000;
-const io = new Server(app );
+//const io = new Server(app);
 startDB();
 app.use(cors());
 app.use(express.json());

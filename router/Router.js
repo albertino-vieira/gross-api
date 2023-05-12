@@ -4,12 +4,12 @@ const {
   deleteGroceries,
   createGroceries,
   deleteGroceriesBulk,
-} = require("../controller/GrocerieController");
+} = require("../controller/Grocerie/GrocerieController");
 const {
   createUser,
   login,
   deleteUser,
-} = require("../controller/UserContoller");
+} = require("../controller/User/UserContoller");
 const router = express.Router();
 
 router.get("/groceries", getGroceries);
