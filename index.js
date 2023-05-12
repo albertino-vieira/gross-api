@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const router = require("./router/Router");
 require("dotenv").config();
+const { Server } = require("socket.io");
 
 function startDB() {
   mongoose.connect(
@@ -22,7 +23,7 @@ db.once("open", function () {
 
 const app = express();
 const PORT = 4000;
-
+const io = new Server(app );
 startDB();
 app.use(cors());
 app.use(express.json());

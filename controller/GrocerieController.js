@@ -4,7 +4,7 @@ const grosserie = require("../db/Grosserie");
 const getGroceries = (req, res) => {
   grosserie.find({}, function (err, result) {
     if (err) {
-      res.send(err);
+      res.status(500).send(err);
     } else {
       res.send(result);
     }
@@ -15,7 +15,7 @@ const deleteGroceries = (req, res) => {
   const id = req.params.id;
   Grosserie.deleteOne({ _id: id }, function (err, data) {
     if (err) {
-      res.status(500).send(error);
+      res.status(500).send(err);
     } else {
       res.send(data);
     }
@@ -26,11 +26,11 @@ const createGroceries = async (req, res) => {
   const ele = Object.fromEntries(
     Object.entries(req.body).filter((e) => e[0] != "_id")
   );
-  const gross = new Grosserie(ele);
+  const grocerieToAdd = new Grosserie(ele);
 
   try {
-    await gross.save();
-    res.send(gross);
+    const grocerie = await grocerieToAdd.save();
+    res.send(grocerie);
   } catch (error) {
     res.status(500).send(error);
   }
@@ -38,7 +38,7 @@ const createGroceries = async (req, res) => {
 
 const deleteGroceriesBulk = async (req, res) => {
   const { ids } = req.body;
-  Grosserie.deleteMany(
+  await Grosserie.deleteMany(
     {
       _id: {
         $in: ids,
@@ -46,7 +46,7 @@ const deleteGroceriesBulk = async (req, res) => {
     },
     function (err, data) {
       if (err) {
-        res.status(500).send(error);
+        res.status(500);
       } else {
         res.send(data);
       }
